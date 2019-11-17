@@ -5,11 +5,11 @@ import Input from '../components/Input'
 import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/colors';
 
-const StartGameScreen = props => {
+const StartGameScreen = ({onStartGame}) => {
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
     const[selectedNumber, setSelectedNumber] = useState('');
-    console.log(props.onStartGame);
+    console.log(onStartGame);
 
     const numberInputHandler = inputText => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
@@ -39,7 +39,7 @@ const StartGameScreen = props => {
             <Button
                 title='Démarrer la partie'
                 color={Colors.primary}
-                onPress={() => props.onStartGame(selectedNumber)}
+                onPress={() => onStartGame(selectedNumber)}
             ></Button>
         </Card>
         )
