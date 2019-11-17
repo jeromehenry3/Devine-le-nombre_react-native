@@ -9,6 +9,7 @@ const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
     const[selectedNumber, setSelectedNumber] = useState('');
+    console.log(props.onStartGame);
 
     const numberInputHandler = inputText => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
@@ -35,7 +36,11 @@ const StartGameScreen = props => {
         <Card style={styles.summaryContainer}>
             <Text>Nombre choisi :</Text>
             <NumberContainer>{selectedNumber}</NumberContainer>
-            <Button title='Démarrer la partie' color={Colors.primary}></Button>
+            <Button
+                title='Démarrer la partie'
+                color={Colors.primary}
+                onPress={() => props.onStartGame(selectedNumber)}
+            ></Button>
         </Card>
         )
     }
