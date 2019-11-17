@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -16,15 +16,47 @@ const generateRandomBetween = (min, max, exclude) => {
 }
 
 const GameScreen = props => {
-    const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, props.userChoice));
+    const [currentGuess, setCurrentGuess] = useState(generateRandomBetween(1, 100, userChoice));
+    const [rounds, setRounds] = useState(0);
+    const currentLow = useRef(1);
+    const currentHigh = useRef(99);
+
+    const { userChoice, onGameOver } = props;
+
+    useEffect(() => {
+        if (currentGuess === userChoice) {
+            onGameOver(rounds);
+        }
+    }, [currentGuess,])
+
+    const nextGuessHandler = direction => {
+        console.log(direction);
+        if (direction === 'lower' && currentGuess < userChoice
+            || direction === 'greater' && currentGuess > userChoice) {
+                Alert.alert(`Ne mens pas`, `Tu sais bien que ce n'est pas vrai`, [{
+                    text: 'Désolé !', style: 'cancel'
+                }]);
+                return;
+        }
+
+        if (direction === 'lower') {
+            currentHigh.current = currentGuess;
+
+        } else {
+            currentLow.current = currentGuess;
+        }
+        const nextNumber = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess)
+        setCurrentGuess(nextNumber);
+        setRounds(currentRounds => currentRounds + 1);
+    }
 
     return (
         <View style={styles.screen}>
             <Text>Tentative :</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
-                <Button title='Plus petit' onPress={() => {}}></Button>
-                <Button title='Plus grand' onPress={() => {}}></Button>
+                <Button title='Plus petit' onPress={() => nextGuessHandler('lower')}></Button>
+                <Button title='Plus grand' onPress={() => nextGuessHandler('greater')}></Button>
             </Card>
         </View>
     );

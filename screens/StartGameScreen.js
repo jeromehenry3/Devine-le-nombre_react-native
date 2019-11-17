@@ -9,7 +9,6 @@ const StartGameScreen = ({onStartGame}) => {
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
     const[selectedNumber, setSelectedNumber] = useState('');
-    console.log(onStartGame);
 
     const numberInputHandler = inputText => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
@@ -21,6 +20,7 @@ const StartGameScreen = ({onStartGame}) => {
     const confirmInputHandler = () => {
         const chosenNumber = parseInt(enteredValue);
         if (chosenNumber === NaN || chosenNumber <= 0 || chosenNumber > 99) {
+            // TODO : problème de NaN non reconnu
             Alert.alert('Nombre invalide', 'le nombre doit être compris entre 1 et 99', [{text: 'Ok', style: 'destructive', onPress: resetInputHandler}])
             return;
         }
