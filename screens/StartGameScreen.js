@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { View, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import Card from '../components/Card'
+import BodyText from '../components/BodyText';
 import Input from '../components/Input'
 import NumberContainer from '../components/NumberContainer';
 import Colors from '../constants/colors';
@@ -47,9 +48,9 @@ const StartGameScreen = ({onStartGame}) => {
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Nouvelle partie</Text>
+                <BodyText style={styles.title}>Nouvelle partie</BodyText>
                 <Card style={styles.card}>
-                    <Text>Choisissez un nombre</Text>
+                    <BodyText>Choisissez un nombre</BodyText>
                     <Input
                     onChangeText={numberInputHandler}
                     value={enteredValue}
