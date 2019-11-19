@@ -47,7 +47,7 @@ const StartGameScreen = ({onStartGame}) => {
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.screen}>
-                <Text>Nouvelle partie</Text>
+                <Text style={styles.title}>Nouvelle partie</Text>
                 <Card style={styles.card}>
                     <Text>Choisissez un nombre</Text>
                     <Input
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         marginVertical: 10,
+        fontFamily: 'open-sans-bold',
     },
     summaryContainer: {
         marginTop: 20,
