@@ -4,6 +4,8 @@ import Card from '../components/Card'
 import BodyText from '../components/BodyText';
 import Input from '../components/Input'
 import NumberContainer from '../components/NumberContainer';
+import MainButton from '../components/MainButton';
+
 import Colors from '../constants/colors';
 
 const StartGameScreen = ({onStartGame}) => {
@@ -34,13 +36,11 @@ const StartGameScreen = ({onStartGame}) => {
     if (confirmed) {
         confirmedOutput = (
         <Card style={styles.summaryContainer}>
-            <Text>Nombre choisi :</Text>
+            <BodyText>Nombre choisi :</BodyText>
             <NumberContainer>{selectedNumber}</NumberContainer>
-            <Button
-                title='Démarrer la partie'
-                color={Colors.primary}
+            <MainButton
                 onPress={() => onStartGame(selectedNumber)}
-            ></Button>
+            >Démarrer la partie</MainButton>
         </Card>
         )
     }
